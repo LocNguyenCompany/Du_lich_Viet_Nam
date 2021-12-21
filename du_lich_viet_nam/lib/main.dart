@@ -1,40 +1,35 @@
+import 'package:du_lich_viet_nam/page/dang_ki.dart';
+import 'package:du_lich_viet_nam/page/dang_nhap.dart';
+import 'package:du_lich_viet_nam/page/trang_ca_nhan.dart';
+import 'package:du_lich_viet_nam/page/trang_chi_tiet.dart';
+import 'package:du_lich_viet_nam/page/trang_chu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Named Routes Demo',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/Signup': (context) => SignupPage(),
+        '/Home': (context) => HomePage(),
+        '/Profile': (context) => ProfilePage(),
+        '/Detail': (context) => DetailPage(),
+      },
     );
   }
 }
