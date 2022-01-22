@@ -10,6 +10,7 @@ class HotPage extends StatelessWidget {
       backgroundColor: Colors.purple.shade100,
       appBar: AppBar(
         backgroundColor: Colors.purple.shade300,
+        automaticallyImplyLeading: false,
         title: Text('Tourism App'),
       ),
       body: const Center(
