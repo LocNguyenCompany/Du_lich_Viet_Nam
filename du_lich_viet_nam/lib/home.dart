@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.purple.shade100,
       appBar: AppBar(
         backgroundColor: Colors.purple.shade300,
+        automaticallyImplyLeading: false,
         title: Text('Tourism App'),
         actions: <Widget>[
           IconButton(

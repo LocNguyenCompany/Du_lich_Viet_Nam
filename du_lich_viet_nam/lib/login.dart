@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'api.dart';
+import 'main.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -8,7 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _clickEye = true;
@@ -18,8 +23,28 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  Iterable s = [];
   @override
   Widget build(BuildContext context) {
+    bool isUpdate = true;
+    void _showMaterialDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Loginfail'),
+              content: Text('Login fail'),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Close')),
+              ],
+            );
+          });
+    }
+
     return Scaffold(
       body: Container(
         // ignore: prefer_const_constructors
@@ -53,13 +78,13 @@ class _LoginPageState extends State<LoginPage> {
                     // ignore: prefer_const_constructors
                     margin: EdgeInsets.fromLTRB(20, 100, 20, 20),
                     child: TextField(
-                      controller: _emailController,
+                      controller: _usernameController,
                       textAlign: TextAlign.center,
                       // ignore: prefer_const_constructors
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: "Email",
+                          hintText: "Username",
                           // ignore: prefer_const_constructors
                           border: OutlineInputBorder(
                               // ignore: prefer_const_constructors
@@ -97,9 +122,30 @@ class _LoginPageState extends State<LoginPage> {
                     child: SizedBox(
                       width: double.maxFinite,
                       // this is the height of TextField
-                      child: OutlinedButton(
+                      child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/Profile');
+                            if (isUpdate == true) {
+                              API(url: "http://10.0.2.2:8000/login/${_usernameController.text}/${_passwordController.text}")
+                                  .getDataString()
+                                  .then((value) {
+                                s = json.decode(value);
+                                isUpdate = false;
+                                setState(() {
+                                  if (s.elementAt(0)['kq'].toString() ==
+                                      'true') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyStatefulWidget(
+                                                  info: s,
+                                                )));
+                                  } else {
+                                    _showMaterialDialog();
+                                  }
+                                });
+                              });
+                            }
                           },
                           child: const Text(
                             "Đăng nhập",

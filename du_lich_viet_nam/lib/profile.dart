@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
+import 'api.dart';
+
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  Iterable info;
+  ProfilePage({required this.info});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -69,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             Text(
-              "Nguyễn Thị Lụa Là Nhung Gấm",
+              widget.info.elementAt(0)['kq1']['username'].toString(),
               style: TextStyle(
                   fontFamily: "Lora",
                   fontWeight: FontWeight.bold,
@@ -157,7 +162,6 @@ class _ProfilePageState extends State<ProfilePage> {
               thickness: 1.5,
               color: Colors.grey.shade300,
             ),
-            
           ],
         ),
       ),
