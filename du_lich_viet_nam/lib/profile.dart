@@ -1,8 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
-
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ],
             ),
             Text(
-              "Nguyễn Thị Lụa Là Nhung Gấm",
+              "Nguyen thi lua la nhung gam",
               style: TextStyle(
                   fontFamily: "Lora",
                   fontWeight: FontWeight.bold,
@@ -157,7 +157,6 @@ class _ProfilePageState extends State<ProfilePage> {
               thickness: 1.5,
               color: Colors.grey.shade300,
             ),
-            
           ],
         ),
       ),

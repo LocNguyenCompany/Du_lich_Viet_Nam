@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,6 +10,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.purple.shade100,
       appBar: AppBar(
         backgroundColor: Colors.purple.shade300,
+        automaticallyImplyLeading: false,
         title: Text('Tourism App'),
         actions: <Widget>[
           IconButton(

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -8,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _emailController = TextEditingController();
+  final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
   bool _clickEye = true;
@@ -53,13 +56,13 @@ class _LoginPageState extends State<LoginPage> {
                     // ignore: prefer_const_constructors
                     margin: EdgeInsets.fromLTRB(20, 100, 20, 20),
                     child: TextField(
-                      controller: _emailController,
+                      controller: _usernameController,
                       textAlign: TextAlign.center,
                       // ignore: prefer_const_constructors
                       decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: "Email",
+                          hintText: "Username",
                           // ignore: prefer_const_constructors
                           border: OutlineInputBorder(
                               // ignore: prefer_const_constructors
@@ -97,10 +100,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: SizedBox(
                       width: double.maxFinite,
                       // this is the height of TextField
-                      child: OutlinedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/Profile');
-                          },
+                      child: ElevatedButton(
+                          onPressed: () {},
                           child: const Text(
                             "Đăng nhập",
                             style: TextStyle(color: Colors.amber, fontSize: 20),

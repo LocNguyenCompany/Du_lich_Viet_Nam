@@ -5,6 +5,7 @@ import 'flight.dart';
 import 'home.dart';
 import 'hot.dart';
 import 'hotel.dart';
+import 'login.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,16 +16,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: _title,
-      home: MyStatefulWidget(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  Iterable info;
+  MyStatefulWidget({required this.info});
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
@@ -32,16 +34,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    HotPage(),
-    HotelPage(),
-    FlightPage(),
-    CulinaryPage(),
-    AccountPage()
-  ];
+  TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -51,6 +44,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = <Widget>[
+      HomePage(),
+      HotPage(),
+      HotelPage(),
+      FlightPage(),
+      CulinaryPage(),
+      AccountPage(info: widget.info),
+    ];
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
