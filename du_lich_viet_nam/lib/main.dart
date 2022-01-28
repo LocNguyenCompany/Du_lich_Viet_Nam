@@ -1,3 +1,4 @@
+import 'package:du_lich_viet_nam/detail.dart';
 import 'package:flutter/material.dart';
 import 'account.dart';
 import 'culinary.dart';
