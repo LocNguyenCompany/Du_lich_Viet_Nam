@@ -112,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 SizedBox(
-                  width: 15,
+                  width: 10,
                 ),
                 ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(15)),

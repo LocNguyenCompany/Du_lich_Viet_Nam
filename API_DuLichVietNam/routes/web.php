@@ -38,3 +38,6 @@ Route::get('/show-Vung', [VungController::class, 'show_vung'])->name('show_vung'
 
 Route::get('/login/{username}/{password}', [TaiKhoanController::class, 'login'])->name('login');
 Route::get('/getUserAccount/{username}/{password}', [TaiKhoanController::class, 'getUserAccount'])->name('getUserAccount');
+
+Route::get('/all_bai_viet', [BaiVietController::class, 'get_all_bai_viet'])->name('allBaiViet');
+Route::get('/all_dia_danh', [DiaDanhController::class, 'get_all_dia_danh'])->name('allDiaDanh');
