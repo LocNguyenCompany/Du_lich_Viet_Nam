@@ -23,12 +23,10 @@ class DetailPage extends StatelessWidget {
                     Container(
                       child: Image.asset(
                         'assets/img/cungdinhhue.jpg',
-                        width: 200,
-                        height: 120,
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                       child: Row(
                         children: [
                           Icon(
