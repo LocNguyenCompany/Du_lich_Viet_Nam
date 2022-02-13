@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
+import 'api.dart';
 import 'main.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,8 +23,28 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  Iterable s = [];
   @override
   Widget build(BuildContext context) {
+    bool isUpdate = true;
+    void _showMaterialDialog() {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('Loginfail'),
+              content: Text('Login fail'),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Close')),
+              ],
+            );
+          });
+    }
+
     return Scaffold(
       body: Container(
         // ignore: prefer_const_constructors
@@ -101,7 +123,30 @@ class _LoginPageState extends State<LoginPage> {
                       width: double.maxFinite,
                       // this is the height of TextField
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (isUpdate == true) {
+                              API(url: "http://10.0.2.2:8000/login/${_usernameController.text}/${_passwordController.text}")
+                                  .getDataString()
+                                  .then((value) {
+                                s = json.decode(value);
+                                isUpdate = false;
+                                setState(() {
+                                  if (s.elementAt(0)['kq'].toString() ==
+                                      'true') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyStatefulWidget(
+                                                  info: s,
+                                                )));
+                                  } else {
+                                    _showMaterialDialog();
+                                  }
+                                });
+                              });
+                            }
+                          },
                           child: const Text(
                             "Đăng nhập",
                             style: TextStyle(color: Colors.amber, fontSize: 20),

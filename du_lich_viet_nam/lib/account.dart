@@ -17,7 +17,9 @@ class AccountPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Text('Tourism App'),
       ),
-      body: ProfilePage(),
+      body: ProfilePage(
+        info: info,
+      ),
     );
   }
 }
