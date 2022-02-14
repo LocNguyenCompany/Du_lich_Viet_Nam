@@ -10,6 +10,7 @@ use App\Http\Controllers\NhaNghiController;
 use App\Http\Controllers\NhuCauController;
 use App\Http\Controllers\QuanAnController;
 use App\Http\Controllers\TaiKhoanController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\VungController;
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,22 @@ Route::get('/getUserAccount/{username}/{password}', [TaiKhoanController::class, 
 
 Route::get('/all_bai_viet', [BaiVietController::class, 'get_all_bai_viet'])->name('allBaiViet');
 Route::get('/all_dia_danh', [DiaDanhController::class, 'get_all_dia_danh'])->name('allDiaDanh');
+
+Route::prefix('admin')->group(function () {
+    Route::prefix('AccountManagement')->group(function () {
+        Route::get('/', [dashboardController::class, 'AccountManagement'])->name("AccountManagement");
+    });
+    Route::get('/', [dashboardController::class, 'admin_index'])->name("admin_index");
+    Route::get('createAccount', [dashboardController::class, 'showcreateAccount'])->name("showcreateAccount");
+    Route::post('createAccount', [dashboardController::class, 'createAccount'])->name("createAccount");
+    Route::get('updateAccount/{id}', [dashboardController::class, 'showupdateAccount'])->name("showupdateAccount");
+    Route::post('updateAccount/{id}', [dashboardController::class, 'updateAccount'])->name("updateAccount");
+    Route::get('deleteAccount/{id}', [dashboardController::class, 'deleteAccount'])->name("deleteAccount");
+});
+Route::prefix('Postmanagement')->group(function () {
+    Route::get('/', [dashboardController::class, 'Postmanagement'])->name("Postmanagement");
+    Route::get('/diadanh/{id}', [dashboardController::class, 'diadanh'])->name("diadanh");
+    Route::get('/baiviet/{id}', [dashboardController::class, 'baiviet'])->name("baiviet");
+    Route::post('/ClassDetail/{id}', [dashboardController::class, 'ClassDetail'])->name("ClassDetail");
+
+});
