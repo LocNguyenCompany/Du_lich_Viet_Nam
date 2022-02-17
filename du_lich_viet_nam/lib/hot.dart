@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:du_lich_viet_nam/primary.dart';
 import 'package:flutter/material.dart';
 
 class HotPage extends StatelessWidget {
@@ -7,9 +7,9 @@ class HotPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple.shade100,
+      backgroundColor: pColor,
       appBar: AppBar(
-        backgroundColor: Colors.purple.shade300,
+        backgroundColor: pAppbarColor,
         automaticallyImplyLeading: false,
         title: Text('Tourism App'),
       ),

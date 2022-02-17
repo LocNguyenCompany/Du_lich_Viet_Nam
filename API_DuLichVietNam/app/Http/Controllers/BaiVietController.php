@@ -13,7 +13,12 @@ class BaiVietController extends Controller
     }
     function get_all_bai_viet()
     {
-        $baiviet = BaiViet::all();
+        $baiviet = BaiViet::orderBy('Like', 'desc')->get();
         return json_encode($baiviet);
+    }
+    function get_bai_viet_id ($id)
+    {
+        $diadanh = BaiViet::where("Dia_danh", "=" ,$id)->get();
+        return json_encode($diadanh);
     }
 }

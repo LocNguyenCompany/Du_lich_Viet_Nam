@@ -16,4 +16,9 @@ class DiaDanhController extends Controller
         $diadanh = DiaDanh::all();
         return json_encode($diadanh);
     }
+    function get_dia_danh_id ($id)
+    {
+        $diadanh = DiaDanh::find($id);
+        return json_encode($diadanh);
+    }
 }
