@@ -44,6 +44,7 @@ Route::get('/all_bai_viet', [BaiVietController::class, 'get_all_bai_viet'])->nam
 Route::get('/all_dia_danh', [DiaDanhController::class, 'get_all_dia_danh'])->name('allDiaDanh');
 Route::get('id_dia_danh/{id}', [DiaDanhController::class, 'get_dia_danh_id'])->name('getDiaDanh');
 Route::get('bai_viet_id_dia_danh/{id}', [BaiVietController::class, 'get_bai_viet_id'])->name('getBaiVietId');
+Route::get('chia_se_bai_viet/{idBaiViet}/{idTaiKhoan}', [BaiVietController::class, 'chia_se_bai_viet'])->name('chiaSeBaiViet');
 
 Route::prefix('admin')->group(function () {
     Route::prefix('AccountManagement')->group(function () {

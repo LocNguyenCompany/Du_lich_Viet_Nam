@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BaiViet;
+use App\Models\ChiaSeBaiViet;
 
 class BaiVietController extends Controller
 {
@@ -20,5 +21,12 @@ class BaiVietController extends Controller
     {
         $diadanh = BaiViet::where("Dia_danh", "=" ,$id)->get();
         return json_encode($diadanh);
+    }
+    function chia_se_bai_viet($idBaiViet, $idTaiKhoan)
+    {
+        $a = new ChiaSeBaiViet();
+        $a->id_bai_viet = $idBaiViet;
+        $a->id_tai_khoan = $idTaiKhoan;
+        $a->save();
     }
 }
