@@ -107,7 +107,8 @@ class _ListContentState extends State<ListContent> {
                             Icon(Icons.thumb_up_alt_outlined),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("10"),
+                              child: Text(
+                                  baiviet.elementAt(index)['Like'].toString()),
                             )
                           ],
                         ),
@@ -116,7 +117,9 @@ class _ListContentState extends State<ListContent> {
                             Icon(Icons.thumb_down_alt_outlined),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text("10"),
+                              child: Text(baiviet
+                                  .elementAt(index)['Unlike']
+                                  .toString()),
                             )
                           ],
                         ),

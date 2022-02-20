@@ -52,12 +52,10 @@ class _LoginPageState extends State<LoginPage> {
       s = json.decode(value);
 
       if (s.elementAt(0)['kq'].toString() == 'true') {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(
-                builder: (context) => MyStatefulWidget(
-                      info: s,
-                    )));
+            MaterialPageRoute(builder: (context) => MyStatefulWidget(info: s)),
+            (route) => false);
       } else {
         _showMaterialDialog();
       }

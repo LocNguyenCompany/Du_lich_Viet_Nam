@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+
+import 'api.dart';
+import 'detail.dart';
+import 'primary.dart';
 
 class ProfilePage extends StatefulWidget {
   Iterable info;
@@ -9,6 +15,26 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  Iterable baiviet = [];
+  Future<void> loadBaiViet() async {
+    await API(
+            url: pUrl +
+                "/get_bai_viet_chia_se/" +
+                widget.info.elementAt(0)['kq1']['id'].toString())
+        .getDataString()
+        .then((value) {
+      baiviet = json.decode(value);
+    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadBaiViet();
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -157,73 +183,95 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
             Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(8),
-                  padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                  constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 10,
-                            color: Colors.black,
-                            offset: Offset(5, 5))
-                      ]),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
-                          child: Image.network(
-                            "https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg",
-                            fit: BoxFit.fitWidth,
-                            width: MediaQuery.of(context).size.width,
+              children: List.generate(
+                  baiviet.length,
+                  (index) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailPage(
+                                      baiviet: baiviet.elementAt(index))));
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(8),
+                          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    blurRadius: 10,
+                                    color: Colors.black,
+                                    offset: Offset(5, 5))
+                              ]),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "",
+                                  style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 10, 10),
+                                  child: Image.network(
+                                    pUrl +
+                                        '/images/' +
+                                        baiviet
+                                            .elementAt(index)['Hinh_anh']
+                                            .toString(),
+                                    fit: BoxFit.fitWidth,
+                                    width: MediaQuery.of(context).size.width,
+                                  ),
+                                ),
+                                Text(
+                                  baiviet
+                                      .elementAt(index)['Noi_dung']
+                                      .toString()
+                                      .substring(0, 20),
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(Icons.thumb_up_alt_outlined),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Text(baiviet
+                                              .elementAt(index)['Like']
+                                              .toString()),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(Icons.thumb_down_alt_outlined),
+                                        Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(baiviet
+                                                .elementAt(index)['Unlike']
+                                                .toString())),
+                                      ],
+                                    ),
+                                    Icon(Icons.share_outlined),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                        Text(
-                          "Nội dung baig viết",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                Icon(Icons.thumb_up_alt_outlined),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text("10"),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.thumb_down_alt_outlined),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text("10"),
-                                )
-                              ],
-                            ),
-                            Icon(Icons.share_outlined),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                      )),
             )
           ],
         ),

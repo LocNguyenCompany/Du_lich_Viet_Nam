@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\BaiViet;
 use App\Models\ChiaSeBaiViet;
+use App\Models\TaiKhoan;
 
 class BaiVietController extends Controller
 {
@@ -28,5 +29,12 @@ class BaiVietController extends Controller
         $a->id_bai_viet = $idBaiViet;
         $a->id_tai_khoan = $idTaiKhoan;
         $a->save();
+    }
+    function get_bai_viet_chia_se($idTaiKhoan)
+    {
+        
+        $baiviet = TaiKhoan::find($idTaiKhoan);
+        
+        return json_encode($baiviet->DSBaiViet);
     }
 }

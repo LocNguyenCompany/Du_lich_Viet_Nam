@@ -11,4 +11,9 @@ class TaiKhoan extends Authentication
 {
     use HasFactory;
     protected $table = "tai_khoan";
+    function DSBaiViet()
+    {
+        return $this->belongsToMany('App\Models\BaiViet','chia_se_bai_viet','id_tai_khoan','id_bai_viet', 'id', 'id');
+
+    }
 }
